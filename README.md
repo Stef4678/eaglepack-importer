@@ -162,4 +162,4 @@ LICENSE            MIT
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT © 2026 Kerekes Stefan — see [LICENSE](LICENSE).
