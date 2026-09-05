@@ -9,6 +9,16 @@ Each imported item becomes a Markdown note that **embeds the original image** an
 
 ---
 
+## Screenshots
+
+![screenshot 1](assets/screenshot-1.png)
+
+![screenshot 2](assets/screenshot-2.png)
+
+![screenshot 3](assets/screenshot-3.png)
+
+---
+
 ## What is an EaglePack?
 
 `.eaglepack` is Eagle's "素材包 / material pack" export format — a ZIP archive that carries items (images, videos, fonts, design files…) plus their metadata. The same container format is produced when you export selected items from Eagle, and free packs from the Eagle community (`eagle.cool/resources`) ship as `.eaglepack` files. The plugin also accepts plain `.zip` archives of an Eagle `.library` folder, so you can import a whole library export as well.
