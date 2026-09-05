@@ -52,12 +52,19 @@ jobs:
           fetch-depth: 0
 
       - name: Attest build provenance
+        id: attest
         uses: actions/attest-build-provenance@v3
         with:
           subject-path: |
             main.js
             manifest.json
             styles.css
+
+      - name: Print attestation URLs
+        run: |
+          echo "attestation-id=${{ steps.attest.outputs.attestation-id }}"
+          echo "attestation-url=${{ steps.attest.outputs.attestation-url }}"
+          echo "bundle-path=${{ steps.attest.outputs.bundle-path }}"
 
       - name: Publish release assets
         uses: softprops/action-gh-release@v2
