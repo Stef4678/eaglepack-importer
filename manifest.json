@@ -1,7 +1,7 @@
 {
   "id": "eaglepack-importer",
   "name": "EaglePack Importer",
-  "version": "1.1.0",
+  "version": "0.0.1",
   "minAppVersion": "1.4.0",
   "description": "Import and display Eagle (eagle.cool) EaglePack exports — .eaglepack files and zipped Eagle libraries — in single or batch mode. Each item becomes a Markdown note with its image embedded plus an index/gallery note per pack.",
   "author": "EaglePack Importer",
