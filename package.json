@@ -1,0 +1,17 @@
+{
+  "name": "obsidian-eaglepack-importer",
+  "version": "1.1.0",
+  "description": "Obsidian plugin to import and display Eagle (eagle.cool) EaglePack export files (.eaglepack) in single or batch mode.",
+  "main": "main.js",
+  "scripts": {
+    "test": "node tests/run.mjs && node tests/smoke.mjs"
+  },  "keywords": [
+    "obsidian",
+    "plugin",
+    "eagle",
+    "eaglepack",
+    "importer"
+  ],
+  "license": "MIT",
+  "devDependencies": {}
+}
