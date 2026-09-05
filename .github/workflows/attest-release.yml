@@ -1,0 +1,70 @@
+name: Attest and publish release assets
+
+# Creates Sigstore provenance attestations for the plugin's release files
+# (required by the Obsidian community plugin store) and makes sure those exact
+# files are attached to the GitHub Release.
+#
+# Triggers:
+#   - automatically on version tags like 0.0.3 (push),
+#   - manually with "gh workflow run attest-release.yml -f tag=0.0.2" to
+#     attest/re-attach assets of an existing release.
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing release tag to attest (e.g. 0.0.2)'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+  artifact-metadata: write
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve release tag
+        id: tag
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            TAG="${{ github.ref_name }}"
+          else
+            TAG="${{ github.event.inputs.tag }}"
+          fi
+          if [ -z "$TAG" ]; then
+            echo "No release tag provided (run with -f tag=0.0.2 or push a version tag)."
+            exit 1
+          fi
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout release tree
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.tag.outputs.tag }}
+          fetch-depth: 0
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: |
+            main.js
+            manifest.json
+            styles.css
+
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          update_release: true
+          files: |
+            main.js
+            manifest.json
+            styles.css
